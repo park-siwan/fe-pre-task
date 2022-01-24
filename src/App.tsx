@@ -1,11 +1,8 @@
 import React from "react";
+import Root from "./pages";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>hellow world</h1>
-    </div>
-  );
+  return <Root />;
 }
 
 export default App;
