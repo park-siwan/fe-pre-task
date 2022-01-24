@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import GNB from "../components/organisms/GNB";
 
 const Container = styled.div`
   margin: 0px auto;
@@ -10,6 +11,13 @@ const Container = styled.div`
 `;
 
 const Layout: FC = ({ children }) => {
-  return <Container>{children}</Container>;
+  return (
+    <div>
+      <Container>
+        <GNB />
+        {children}
+      </Container>
+    </div>
+  );
 };
 export default Layout;
