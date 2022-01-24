@@ -12,12 +12,10 @@ const Container = styled.div`
 
 const Layout: FC = ({ children }) => {
   return (
-    <div>
-      <Container>
-        <GNB />
-        {children}
-      </Container>
-    </div>
+    <Container>
+      <GNB />
+      {children}
+    </Container>
   );
 };
 export default Layout;

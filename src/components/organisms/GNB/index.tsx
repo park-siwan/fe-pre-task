@@ -5,7 +5,7 @@ const Header = styled.header`
   height: 70px;
   background-color: rgb(0, 0, 0);
 `;
-const Wraper = styled.div`
+const Nav = styled.nav`
   height: 100%;
   display: flex;
   -webkit-box-pack: justify;
@@ -17,15 +17,14 @@ const Wraper = styled.div`
 export default function GNB() {
   return (
     <Header>
-      <Wraper>
-        <nav>
-          <Link to="/">
-            <Typography variant="h1" color="white">
-              Motionlabs
-            </Typography>
-          </Link>
-        </nav>
-      </Wraper>
+      <Nav>
+        <Link to="/">
+          <Typography variant="h1" color="white">
+            Motionlabs
+          </Typography>
+        </Link>
+        \
+      </Nav>
     </Header>
   );
 }
