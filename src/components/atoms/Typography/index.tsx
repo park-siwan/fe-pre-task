@@ -3,6 +3,7 @@ import styled from "styled-components";
 const H1 = styled.h1`
   color: ${(props) => props.color || "rgb(36, 36, 36)"};
   font-size: 24px;
+  font-weight: 700;
 `;
 const H2 = styled.h2``;
 

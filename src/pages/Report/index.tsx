@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Svg, LineChartContainer } from "./style";
+import {
+  Svg,
+  LineChartContainer,
+  ReportContainer,
+  Header,
+  ReportWrap,
+  BarChartContainer,
+} from "./style";
 import LineChart from "./LineChart";
 import BarChart from "./BarChart";
+import Typography from "../../components/atoms/Typography";
 
 export default function Report() {
   //라인차트는 cycle 사용, 바 차트는 period, startDate
@@ -40,20 +48,28 @@ export default function Report() {
 
   return (
     <>
-      <h1>User Report</h1>
-      <div>
-        <header>상태</header>
-        <LineChartContainer>
-          <Svg>
-            <LineChart data={data} />
-          </Svg>
-        </LineChartContainer>
-        <div>
-          <Svg>
-            <BarChart data={data} />
-          </Svg>
-        </div>
-      </div>
+      <ReportContainer>
+        <Typography variant="h1">User Report</Typography>
+        <ReportWrap>
+          <Header>
+            <div />
+            <h2>활동 주기</h2>
+            <div />
+            <h2>활동 기간, 시작일</h2>
+          </Header>
+
+          <LineChartContainer>
+            <Svg>
+              <LineChart data={data} />
+            </Svg>
+          </LineChartContainer>
+          <BarChartContainer>
+            <Svg>
+              <BarChart data={data} />
+            </Svg>
+          </BarChartContainer>
+        </ReportWrap>
+      </ReportContainer>
     </>
   );
 }
