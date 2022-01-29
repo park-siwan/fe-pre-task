@@ -1,6 +1,5 @@
-import React, { ReactSVGElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import { Svg, Circle, Text, Line } from "./style";
 
 export default function Report() {
@@ -22,7 +21,7 @@ export default function Report() {
     return null;
   }
 
-  //CircleList에 영향을 주는 상수 정의
+  //CircleList LineList에서 사용하는 공통 상수값
   const START_POINT = 100;
   const TEXT_CENTER = -10; //글자 가운데 정렬용
   const DOWN_Y = 160;
@@ -100,7 +99,9 @@ export default function Report() {
             <LineList />
           </Svg>
         </div>
-        <div> 바차트</div>
+        <div>
+          바차트<Svg> </Svg>
+        </div>
       </div>
     </>
   );
