@@ -10,19 +10,33 @@ const LineListContainer = styled.div`
 
 export default function Report() {
   //라인차트는 cycle 사용, 바 차트는 period, startDate
-  const [data, setData] = useState([{ cycle: 0, period: 0, startDate: "" }]);
+  const [data, setData] = useState([
+    { cycle: 0, period: 0, startDate: "", maxPeriod: 0 },
+  ]);
 
   useEffect(() => {
+    const maxPeriodFindPush = (data: [{ maxPeriod: number }]) => {
+      let periodList: [number] = [0];
+      data.forEach((item: any) => {
+        periodList.push(item.period);
+      });
+      const maxPeriod: number = Math.max(...periodList);
+      for (let i in data) {
+        data[i].maxPeriod = maxPeriod;
+      }
+    };
+
     const url = "https://motionz-kr.github.io/playground/apis/report.json";
     axios.get(url).then((response) => {
-      const {
+      let {
         data: { data },
       } = response;
-      console.log(data);
-
+      maxPeriodFindPush(data);
       setData(data);
+      console.log(data);
     });
   }, []);
+
   if (typeof data === "undefined" || data[0].cycle === 0) {
     return null;
   }
@@ -112,14 +126,21 @@ export default function Report() {
     //최대 100px
     //최대값 선별
     //4, 7, 5, 10, 15
-    // max;
+    //15
+    //4/15
+
     return (
       <>
-        {data.map(({ period, startDate }, index: number) => {
+        {data.map(({ period, startDate, maxPeriod }, index: number) => {
+          const RELATIVE_RATIO = 100 * (period / maxPeriod);
           return (
             <Group x={START_POINT * (index + 1)} y={30} key={period}>
-              <Text y={50 - 10}>{period}일</Text>
-              <Bar x={-15} y={50} height={50}></Bar>
+              <Text y={-10}>{period}일</Text>
+              <Bar
+                x={-15}
+                y={100 - RELATIVE_RATIO}
+                height={RELATIVE_RATIO}
+              ></Bar>
               <Text y={125}>{format(new Date(startDate), "MM/dd")}</Text>
             </Group>
           );
