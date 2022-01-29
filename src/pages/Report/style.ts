@@ -15,5 +15,5 @@ export const Text = styled.text`
 `;
 export const Line = styled.line`
   stroke: #222;
-  stroke-width: "2";
+  stroke-width: 2;
 `;

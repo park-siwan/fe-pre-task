@@ -1,7 +1,7 @@
 import React, { ReactSVGElement, useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { Svg, Circle, Text } from "./style";
+import { Svg, Circle, Text, Line } from "./style";
 
 export default function Report() {
   //라인차트는 cycle 사용, 바 차트는 period, startDate
@@ -68,6 +68,26 @@ export default function Report() {
     );
   };
 
+  const LineList = (): JSX.Element => {
+    return (
+      <>
+        {data.map(({ cycle }, index: number) => {
+          if (index !== data.length - 1) {
+            return (
+              <Line
+                x1={START_POINT * (index + 1)}
+                y1={DOWN_Y - cycle}
+                x2={START_POINT * (index + 2)}
+                y2={DOWN_Y - data[index + 1].cycle}
+              ></Line>
+            );
+          } else {
+            return null;
+          }
+        })}
+      </>
+    );
+  };
   return (
     <>
       <h1>User Report</h1>
@@ -77,6 +97,7 @@ export default function Report() {
           라인차트
           <Svg>
             <CircleList />
+            <LineList />
           </Svg>
         </div>
         <div> 바차트</div>
