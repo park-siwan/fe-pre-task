@@ -23,7 +23,6 @@ export default function GNB() {
             Motionlabs
           </Typography>
         </Link>
-        \
       </Nav>
     </Header>
   );
