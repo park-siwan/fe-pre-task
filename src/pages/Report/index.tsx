@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactSVGElement, useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { Svg, Circle, Text } from "./style";
@@ -21,19 +21,20 @@ export default function Report() {
   if (typeof data === "undefined" || data[0].cycle === 0) {
     return null;
   }
-  // interface dataType {
-  //   data: [];
-  // }
-  // type itemCycle = {
-  //   cycle?: number;
-  //   period?: number;
-  //   startDate?: string;
-  // };
 
   //CircleList에 영향을 주는 상수 정의
   const START_POINT = 100;
   const TEXT_CENTER = -10; //글자 가운데 정렬용
   const DOWN_Y = 160;
+
+  interface GroupProps {
+    x: number;
+    y: number;
+    children: JSX.Element[];
+  }
+  const Group = ({ x, y, children }: GroupProps): JSX.Element => {
+    return <g transform={`translate(${x},${y})`}>{children}</g>;
+  };
 
   const CircleList = (): JSX.Element => {
     return (
@@ -41,29 +42,25 @@ export default function Report() {
         {data.map(({ cycle }, index: number) => {
           if (index === 0) {
             return (
-              <g
-                transform={`translate(${START_POINT},${DOWN_Y - cycle})`}
-                key={cycle}
-              >
+              <Group x={START_POINT} y={DOWN_Y - cycle} key={cycle}>
                 <Text x={TEXT_CENTER} y={TEXT_CENTER}>
                   {cycle}일
                 </Text>
                 <Circle />
-              </g>
+              </Group>
             );
           } else {
             return (
-              <g
-                transform={`translate(${START_POINT * (index + 1)},${
-                  DOWN_Y - cycle
-                })`}
+              <Group
+                x={START_POINT * (index + 1)}
+                y={DOWN_Y - cycle}
                 key={cycle}
               >
                 <Text x={TEXT_CENTER} y={TEXT_CENTER}>
                   {cycle}일
                 </Text>
                 <Circle />
-              </g>
+              </Group>
             );
           }
         })}
