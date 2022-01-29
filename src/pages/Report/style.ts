@@ -1,5 +1,7 @@
 import styled from "styled-components";
-
+export const LineChartContainer = styled.div`
+  margin-bottom: 40px;
+`;
 export const Svg = styled.svg`
   height: 160px;
   width: 100%;
