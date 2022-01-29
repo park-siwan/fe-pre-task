@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { format } from "date-fns";
-import { Svg, Circle, Text, Line, Bar } from "./style";
-import styled from "styled-components";
-
-const LineListContainer = styled.div`
-  margin-bottom: 40px;
-`;
+import { Svg, LineChartContainer } from "./style";
+import LineChart from "./LineChart";
+import BarChart from "./BarChart";
 
 export default function Report() {
   //라인차트는 cycle 사용, 바 차트는 period, startDate
@@ -15,6 +11,7 @@ export default function Report() {
   ]);
 
   useEffect(() => {
+    //BarChart에서 사용할 최대 값을 구한다.
     const maxPeriodFindPush = (data: [{ maxPeriod: number }]) => {
       let periodList: [number] = [0];
       data.forEach((item: any) => {
@@ -41,128 +38,19 @@ export default function Report() {
     return null;
   }
 
-  //CircleList LineList에서 사용하는 공통 상수값
-  const START_POINT = 100;
-  const TEXT_MARGIN = -10; //글자 정렬용
-  const DOWN_Y = 160;
-
-  interface GroupProps {
-    x: number;
-    y: number;
-    children: JSX.Element[];
-  }
-  const Group = ({ x, y, children }: GroupProps): JSX.Element => {
-    // const GroupStyle = styled.g`
-    //   /* display: flex; */
-    //   display: block;
-    //   margin: auto;
-    //   /* transform-origin: center center; */
-    //   /* width: 30px; */
-    // `;
-    return <g transform={`translate(${x},${y})`}>{children}</g>;
-  };
-
-  const CircleList = (): JSX.Element => {
-    return (
-      <>
-        {data.map(({ cycle }, index: number) => {
-          if (index === 0) {
-            return (
-              <Group x={START_POINT} y={DOWN_Y - cycle} key={cycle}>
-                <Text
-                  y={TEXT_MARGIN}
-                  color={cycle >= 100 ? "#f00" : "rgb(112, 112, 112)"}
-                >
-                  {cycle}일
-                </Text>
-                <Circle />
-              </Group>
-            );
-          } else {
-            return (
-              <Group
-                x={START_POINT * (index + 1)}
-                y={DOWN_Y - cycle}
-                key={cycle}
-              >
-                <Text
-                  y={TEXT_MARGIN}
-                  color={cycle >= 100 ? "#f00" : "rgb(112, 112, 112)"}
-                >
-                  {cycle}일
-                </Text>
-                <Circle />
-              </Group>
-            );
-          }
-        })}
-      </>
-    );
-  };
-
-  const LineList = (): JSX.Element => {
-    return (
-      <>
-        {data.map(({ cycle }, index: number) => {
-          if (index !== data.length - 1) {
-            return (
-              <Line
-                key={index}
-                x1={START_POINT * (index + 1)}
-                y1={DOWN_Y - cycle}
-                x2={START_POINT * (index + 2)}
-                y2={DOWN_Y - data[index + 1].cycle}
-              ></Line>
-            );
-          } else {
-            return null;
-          }
-        })}
-      </>
-    );
-  };
-  const BarList = (): JSX.Element => {
-    //최대 값기준으로 상대비율
-    //최대 100px
-    //최대값 선별
-    //4, 7, 5, 10, 15
-    //15
-    //4/15
-
-    return (
-      <>
-        {data.map(({ period, startDate, maxPeriod }, index: number) => {
-          const RELATIVE_RATIO = 100 * (period / maxPeriod);
-          return (
-            <Group x={START_POINT * (index + 1)} y={30} key={period}>
-              <Text y={-10}>{period}일</Text>
-              <Bar
-                x={-15}
-                y={100 - RELATIVE_RATIO}
-                height={RELATIVE_RATIO}
-              ></Bar>
-              <Text y={125}>{format(new Date(startDate), "MM/dd")}</Text>
-            </Group>
-          );
-        })}
-      </>
-    );
-  };
-
   return (
     <>
       <h1>User Report</h1>
       <div>
         <header>상태</header>
-        <LineListContainer>
+        <LineChartContainer>
           <Svg>
-            <CircleList />
-            <LineList />
+            <LineChart data={data} />
           </Svg>
-        </LineListContainer>
+        </LineChartContainer>
         <div>
           <Svg>
-            <BarList />
+            <BarChart data={data} />
           </Svg>
         </div>
       </div>
