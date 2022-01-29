@@ -9,7 +9,7 @@ export const Circle = styled.circle`
   fill: #222;
 `;
 export const Text = styled.text`
-  fill: ${(props) => props.color || "rgb(112, 112, 112)"};
+  fill: ${(props) => props.color};
   font-size: 12px;
   font-weight: bold;
 `;

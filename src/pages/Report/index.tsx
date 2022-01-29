@@ -42,20 +42,11 @@ export default function Report() {
           if (index === 0) {
             return (
               <Group x={START_POINT} y={DOWN_Y - cycle} key={cycle}>
-                <Text x={TEXT_CENTER} y={TEXT_CENTER}>
-                  {cycle}일
-                </Text>
-                <Circle />
-              </Group>
-            );
-          } else if (index === data.length - 1) {
-            return (
-              <Group
-                x={START_POINT * (index + 1)}
-                y={DOWN_Y - cycle}
-                key={cycle}
-              >
-                <Text x={TEXT_CENTER} y={TEXT_CENTER} color="red">
+                <Text
+                  x={TEXT_CENTER}
+                  y={TEXT_CENTER}
+                  color={cycle >= 100 ? "#f00" : "rgb(112, 112, 112)"}
+                >
                   {cycle}일
                 </Text>
                 <Circle />
@@ -68,7 +59,11 @@ export default function Report() {
                 y={DOWN_Y - cycle}
                 key={cycle}
               >
-                <Text x={TEXT_CENTER} y={TEXT_CENTER}>
+                <Text
+                  x={TEXT_CENTER}
+                  y={TEXT_CENTER}
+                  color={cycle >= 100 ? "#f00" : "rgb(112, 112, 112)"}
+                >
                   {cycle}일
                 </Text>
                 <Circle />
@@ -113,7 +108,8 @@ export default function Report() {
           </Svg>
         </div>
         <div>
-          바차트<Svg> </Svg>
+          바차트
+          <Svg></Svg>
         </div>
       </div>
     </>
