@@ -48,6 +48,19 @@ export default function Report() {
                 <Circle />
               </Group>
             );
+          } else if (index === data.length - 1) {
+            return (
+              <Group
+                x={START_POINT * (index + 1)}
+                y={DOWN_Y - cycle}
+                key={cycle}
+              >
+                <Text x={TEXT_CENTER} y={TEXT_CENTER} color="red">
+                  {cycle}일
+                </Text>
+                <Circle />
+              </Group>
+            );
           } else {
             return (
               <Group
