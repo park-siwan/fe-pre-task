@@ -12,8 +12,15 @@ export const Text = styled.text`
   fill: ${(props) => props.color};
   font-size: 12px;
   font-weight: bold;
+  text-anchor: middle;
 `;
 export const Line = styled.line`
   stroke: #222;
   stroke-width: 2;
+`;
+export const Bar = styled.rect`
+  fill: rgb(51, 51, 51);
+  width: 30px;
+  rx: 10px;
+  ry: 10px;
 `;

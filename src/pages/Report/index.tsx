@@ -1,6 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Svg, Circle, Text, Line } from "./style";
+import { format } from "date-fns";
+import { Svg, Circle, Text, Line, Bar } from "./style";
+import styled from "styled-components";
+
+const LineListContainer = styled.div`
+  margin-bottom: 40px;
+`;
 
 export default function Report() {
   //라인차트는 cycle 사용, 바 차트는 period, startDate
@@ -12,8 +18,8 @@ export default function Report() {
       const {
         data: { data },
       } = response;
-
       console.log(data);
+
       setData(data);
     });
   }, []);
@@ -23,7 +29,7 @@ export default function Report() {
 
   //CircleList LineList에서 사용하는 공통 상수값
   const START_POINT = 100;
-  const TEXT_CENTER = -10; //글자 가운데 정렬용
+  const TEXT_MARGIN = -10; //글자 정렬용
   const DOWN_Y = 160;
 
   interface GroupProps {
@@ -32,6 +38,13 @@ export default function Report() {
     children: JSX.Element[];
   }
   const Group = ({ x, y, children }: GroupProps): JSX.Element => {
+    // const GroupStyle = styled.g`
+    //   /* display: flex; */
+    //   display: block;
+    //   margin: auto;
+    //   /* transform-origin: center center; */
+    //   /* width: 30px; */
+    // `;
     return <g transform={`translate(${x},${y})`}>{children}</g>;
   };
 
@@ -43,8 +56,7 @@ export default function Report() {
             return (
               <Group x={START_POINT} y={DOWN_Y - cycle} key={cycle}>
                 <Text
-                  x={TEXT_CENTER}
-                  y={TEXT_CENTER}
+                  y={TEXT_MARGIN}
                   color={cycle >= 100 ? "#f00" : "rgb(112, 112, 112)"}
                 >
                   {cycle}일
@@ -60,8 +72,7 @@ export default function Report() {
                 key={cycle}
               >
                 <Text
-                  x={TEXT_CENTER}
-                  y={TEXT_CENTER}
+                  y={TEXT_MARGIN}
                   color={cycle >= 100 ? "#f00" : "rgb(112, 112, 112)"}
                 >
                   {cycle}일
@@ -82,6 +93,7 @@ export default function Report() {
           if (index !== data.length - 1) {
             return (
               <Line
+                key={index}
                 x1={START_POINT * (index + 1)}
                 y1={DOWN_Y - cycle}
                 x2={START_POINT * (index + 2)}
@@ -95,21 +107,42 @@ export default function Report() {
       </>
     );
   };
+  const BarList = (): JSX.Element => {
+    //최대 값기준으로 상대비율
+    //최대 100px
+    //최대값 선별
+    //4, 7, 5, 10, 15
+    // max;
+    return (
+      <>
+        {data.map(({ period, startDate }, index: number) => {
+          return (
+            <Group x={START_POINT * (index + 1)} y={30} key={period}>
+              <Text y={50 - 10}>{period}일</Text>
+              <Bar x={-15} y={50} height={50}></Bar>
+              <Text y={125}>{format(new Date(startDate), "MM/dd")}</Text>
+            </Group>
+          );
+        })}
+      </>
+    );
+  };
+
   return (
     <>
       <h1>User Report</h1>
       <div>
         <header>상태</header>
-        <div>
-          라인차트
+        <LineListContainer>
           <Svg>
             <CircleList />
             <LineList />
           </Svg>
-        </div>
+        </LineListContainer>
         <div>
-          바차트
-          <Svg></Svg>
+          <Svg>
+            <BarList />
+          </Svg>
         </div>
       </div>
     </>
