@@ -9,12 +9,15 @@ const Container = styled.div`
   min-height: 100vh;
   height: 100%;
 `;
+const Padding = styled.div`
+  padding: 20px;
+`;
 
 const Layout: FC = ({ children }) => {
   return (
     <Container>
       <GNB />
-      {children}
+      <Padding>{children}</Padding>
     </Container>
   );
 };

@@ -1,8 +1,5 @@
 import styled from "styled-components";
 
-export const ReportContainer = styled.div`
-  padding: 20px;
-`;
 export const ReportWrap = styled.div`
   border: 1px solid rgb(234, 234, 234);
   border-radius: 10px;

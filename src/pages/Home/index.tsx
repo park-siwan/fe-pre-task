@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Wrap = styled.div`
-  padding: 40px;
-`;
-
 const Ul = styled.ul`
   padding-left: 40px;
 `;
@@ -19,15 +15,13 @@ const Li = styled.li`
 `;
 export default function Home() {
   return (
-    <Wrap>
-      <Ul>
-        <Li>
-          <Link to="/report">레포트</Link>
-        </Li>
-        <Li>
-          <Link to="/passenger">승객목록</Link>
-        </Li>
-      </Ul>
-    </Wrap>
+    <Ul>
+      <Li>
+        <Link to="/report">레포트</Link>
+      </Li>
+      <Li>
+        <Link to="/passenger">승객목록</Link>
+      </Li>
+    </Ul>
   );
 }

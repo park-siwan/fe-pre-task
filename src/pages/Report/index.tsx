@@ -3,7 +3,6 @@ import axios from "axios";
 import {
   Svg,
   LineChartContainer,
-  ReportContainer,
   Header,
   ReportWrap,
   BarChartContainer,
@@ -48,28 +47,26 @@ export default function Report() {
 
   return (
     <>
-      <ReportContainer>
-        <Typography variant="h1">User Report</Typography>
-        <ReportWrap>
-          <Header>
-            <div />
-            <h2>활동 주기</h2>
-            <div />
-            <h2>활동 기간, 시작일</h2>
-          </Header>
+      <Typography variant="h1">User Report</Typography>
+      <ReportWrap>
+        <Header>
+          <div />
+          <h2>활동 주기</h2>
+          <div />
+          <h2>활동 기간, 시작일</h2>
+        </Header>
 
-          <LineChartContainer>
-            <Svg>
-              <LineChart data={data} />
-            </Svg>
-          </LineChartContainer>
-          <BarChartContainer>
-            <Svg>
-              <BarChart data={data} />
-            </Svg>
-          </BarChartContainer>
-        </ReportWrap>
-      </ReportContainer>
+        <LineChartContainer>
+          <Svg>
+            <LineChart data={data} />
+          </Svg>
+        </LineChartContainer>
+        <BarChartContainer>
+          <Svg>
+            <BarChart data={data} />
+          </Svg>
+        </BarChartContainer>
+      </ReportWrap>
     </>
   );
 }
