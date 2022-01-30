@@ -1,4 +1,4 @@
-export interface dataProps {
+export interface DataProps {
   data: {
     cycle: number;
     period: number;

@@ -1,8 +1,8 @@
-import React from "react";
-import { Circle, Text, Line } from "../style";
-import { dataProps, START_POINT, Group } from "../common";
+import React from 'react';
+import { Circle, Text, Line } from '../style';
+import { DataProps, START_POINT, Group } from '../common';
 
-export default function LineChart({ data }: dataProps) {
+export default function LineChart({ data }: DataProps) {
   //CircleList LineList에서 사용하는 공통 상수값
   const TEXT_MARGIN = -10; //글자 정렬용
   const DOWN_Y = 160;
@@ -15,7 +15,7 @@ export default function LineChart({ data }: dataProps) {
               <Group x={START_POINT} y={DOWN_Y - cycle} key={cycle}>
                 <Text
                   y={TEXT_MARGIN}
-                  color={cycle >= 100 ? "#f00" : "rgb(112, 112, 112)"}
+                  color={cycle >= 100 ? '#f00' : 'rgb(112, 112, 112)'}
                 >
                   {cycle}일
                 </Text>
@@ -31,7 +31,7 @@ export default function LineChart({ data }: dataProps) {
               >
                 <Text
                   y={TEXT_MARGIN}
-                  color={cycle >= 100 ? "#f00" : "rgb(112, 112, 112)"}
+                  color={cycle >= 100 ? '#f00' : 'rgb(112, 112, 112)'}
                 >
                   {cycle}일
                 </Text>
