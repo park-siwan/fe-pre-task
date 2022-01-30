@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Typography from "../../atoms/Typography";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import Typography from '../../atoms/Typography';
+import { Link } from 'react-router-dom';
 const Header = styled.header`
   height: 70px;
   background-color: rgb(0, 0, 0);
@@ -18,8 +18,8 @@ export default function GNB() {
   return (
     <Header>
       <Nav>
-        <Link to="/">
-          <Typography variant="h1" color="white">
+        <Link to='/'>
+          <Typography variant='h1' color='white'>
             Motionlabs
           </Typography>
         </Link>

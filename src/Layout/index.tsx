@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import styled from "styled-components";
-import GNB from "../components/organisms/GNB";
+import React, { FC } from 'react';
+import styled from 'styled-components';
+import GNB from '../components/organisms/GNB';
 
 const Container = styled.div`
   margin: 0px auto;

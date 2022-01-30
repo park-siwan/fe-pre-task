@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Ul = styled.ul`
   padding-left: 40px;
@@ -17,10 +17,10 @@ export default function Home() {
   return (
     <Ul>
       <Li>
-        <Link to="/report">레포트</Link>
+        <Link to='/report'>레포트</Link>
       </Li>
       <Li>
-        <Link to="/passenger">승객목록</Link>
+        <Link to='/passenger'>승객목록</Link>
       </Li>
     </Ul>
   );
