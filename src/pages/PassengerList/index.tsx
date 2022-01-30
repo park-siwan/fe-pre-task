@@ -50,9 +50,10 @@ export default function PassengerList() {
             <main>
               <img src={logo} alt={name} />
               <h2>{slogan}</h2>
-              {/* {country} */}
             </main>
-            <footer>{_id}</footer>
+            <footer>
+              <h5>{_id}</h5>
+            </footer>
           </CardList>
         )
       )}
