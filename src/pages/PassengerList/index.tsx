@@ -18,8 +18,8 @@ export default function PassengerList() {
     });
   }, []);
 
-  if (typeof data === 'undefined') {
-    return null;
+  if (data.length === 0) {
+    return <p>loading...</p>;
   }
 
   interface DataType {
@@ -35,7 +35,7 @@ export default function PassengerList() {
   }
 
   return (
-    <div>
+    <>
       <header>
         <Typography variant='h1'>Passenger List</Typography>
       </header>
@@ -57,6 +57,6 @@ export default function PassengerList() {
           </CardList>
         )
       )}
-    </div>
+    </>
   );
 }
