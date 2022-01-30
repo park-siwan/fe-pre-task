@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Typography from '../../components/atoms/Typography';
+import { CardList } from './style';
+
 export default function PassengerList() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const url = "https://api.instantwebtools.net/v1/passenger?page=0&size=10";
+    const url = 'https://api.instantwebtools.net/v1/passenger?page=0&size=10';
     axios.get(url).then((response) => {
       let {
         data: { data },
@@ -15,20 +18,44 @@ export default function PassengerList() {
     });
   }, []);
 
-  if (typeof data === "undefined") {
+  if (typeof data === 'undefined') {
     return null;
   }
 
-  interface itemList {
+  interface DataType {
     name: string;
+    trips: number;
+    airline: [
+      {
+        logo: string;
+        slogan: string;
+      }
+    ];
     _id: number;
   }
 
   return (
     <div>
-      {data.map(({ _id, name }: itemList) => (
-        <div key={_id}>{name}</div>
-      ))}
+      <header>
+        <Typography variant='h1'>Passenger List</Typography>
+      </header>
+
+      {data.map(
+        ({ _id, name, trips, airline: [{ logo, slogan }] }: DataType) => (
+          <CardList key={_id}>
+            <header>
+              <h3>{name}</h3>
+              <h4>{trips} trips</h4>
+            </header>
+            <main>
+              <img src={logo} alt={name} />
+              <h2>{slogan}</h2>
+              {/* {country} */}
+            </main>
+            <footer>{_id}</footer>
+          </CardList>
+        )
+      )}
     </div>
   );
 }
